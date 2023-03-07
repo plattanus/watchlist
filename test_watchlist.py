@@ -135,11 +135,11 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertIn('Invalid input.', data)
 
         response = self.client.post('/settings', data=dict(
-            name='Grey Li',
+            name='Tengteng Li',
         ), follow_redirects=True)
         data = response.get_data(as_text=True)
         self.assertIn('Settings updated.', data)
-        self.assertIn('Grey Li', data)
+        self.assertIn('Tengteng Li', data)
 
     def test_create_item(self):
         self.login()
@@ -222,11 +222,11 @@ class WatchlistTestCase(unittest.TestCase):
     def test_admin_command(self):
         db.drop_all()
         db.create_all()
-        result = self.runner.invoke(args=['admin', '--username', 'grey', '--password', '123'])
+        result = self.runner.invoke(args=['admin', '--username', 'teng teng', '--password', '123'])
         self.assertIn('Creating user...', result.output)
         self.assertIn('Done.', result.output)
         self.assertEqual(User.query.count(), 1)
-        self.assertEqual(User.query.first().username, 'grey')
+        self.assertEqual(User.query.first().username, 'tengteng')
         self.assertTrue(User.query.first().validate_password('123'))
 
     def test_admin_command_update(self):
